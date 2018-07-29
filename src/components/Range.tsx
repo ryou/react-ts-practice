@@ -1,26 +1,22 @@
 import * as React from 'react';
 
 interface RangeProps {
-    onChange: (value: number) => void | undefined,
+    value: number;
+    onChange: (value: number) => void | undefined;
 }
 
-interface RangeStates {
-    value: number;
-}
+interface RangeStates {}
 
 export class Range extends React.Component<RangeProps, RangeStates> {
     constructor(props: RangeProps) {
         super(props);
-
-        this.state = {
-            value: 0,
-        };
     }
 
     handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-        const number = Number(e.target.value);
-        this.setState({ value: number });
-        this.props.onChange(number);
+        const value = Number(e.target.value);
+        this.props.onChange(value);
+
+        e.preventDefault();
     }
 
     render() {
@@ -28,6 +24,7 @@ export class Range extends React.Component<RangeProps, RangeStates> {
             'input',
             {
                 type: 'range',
+                value: this.props.value,
                 onChange: (e) => { this.handleChange(e) },
             }
         );

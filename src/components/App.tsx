@@ -26,17 +26,32 @@ export class App extends React.Component<AppProps, AppStates> {
         this.setState({ age: age });
     }
 
+    reset() {
+        this.setState({
+            name: '',
+            age: 0,
+        });
+    }
+
     render() {
         return (
             <div>
-                <div>{ this.state.name }:{ this.state.age }</div>
+                <div>氏名：{ this.state.name }</div>
+                <div>年齢：{ this.state.age }</div>
+                <div>
+                    <button
+                        onClick={() => {this.reset();}}
+                    >reset</button>
+                </div>
                 <div>
                     <Input
+                        value={this.state.name}
                         onChange={(text) => { this.setName(text) }}
                     />
                 </div>
                 <div>
                     <Range
+                        value={this.state.age}
                         onChange={(value) => { this.setAge(value) }}
                     />
                 </div>

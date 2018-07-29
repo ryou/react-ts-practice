@@ -1,26 +1,22 @@
 import * as React from 'react';
 
 interface InputProps {
-    onChange: (text: string) => void | undefined,
+    value: string;
+    onChange: (text: string) => void | undefined;
 }
 
-interface InputStates {
-    value: string;
-}
+interface InputStates {}
 
 export class Input extends React.Component<InputProps, InputStates> {
     constructor(props: InputProps) {
         super(props);
-
-        this.state = {
-            value: '',
-        };
     }
 
     handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         const text = e.target.value;
-        this.setState({ value: text });
         this.props.onChange(text);
+
+        e.preventDefault();
     }
 
     render() {
@@ -28,6 +24,7 @@ export class Input extends React.Component<InputProps, InputStates> {
             'input',
             {
                 type: 'text',
+                value: this.props.value,
                 onChange: (e) => { this.handleChange(e) },
             }
         );
